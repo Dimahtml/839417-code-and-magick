@@ -43,11 +43,18 @@ window.renderStatistics = function(ctx, names, times) {
 
   // Рисуем прямоугольник-полоску
   for (var i = 0; i < times.length; i ++) {
+    var rnd = Math.random();
+    console.log(rnd);
+    ctx.fillStyle = 'rgba(0, 0, 255, ' + rnd + ')';
+    if (names[i] === 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    }
     var differenceBar = Math.round(BAR_HEIGHT - times[i] / getMaxElement(times) * BAR_HEIGHT);
     ctx.fillRect(150 + i * shift, 100 + differenceBar, BAR_WIDTH, BAR_HEIGHT - differenceBar);
   }
 
   // Пишем имя
+  ctx.fillStyle = '#000';
   for (var i = 0; i < names.length; i ++) {
     ctx.fillText(names[i] + '  ', 150 + i * shift, 270);
   }
