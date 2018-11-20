@@ -10,10 +10,11 @@ var BAR_WIDTH = 40;
 var GAP = 50;
 // смещение одной колонки относительно другой
 var shift = BAR_WIDTH + GAP;
+var textColor = '#000';
 
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
-  for (var i = 0; i < arr.length; i++) {
+  for (var i = 1; i < arr.length; i++) {
     if (arr[i] > maxElement) {
       maxElement = arr[i];
     }
@@ -26,6 +27,10 @@ var renderCloud = function (ctx, x, y, color) {
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
+var getRandom = function (min, max) {
+  return Math.random() * (max - min) + min;
+};
+
 window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X + 10, CLOUD_Y + 10, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
@@ -35,7 +40,7 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Список результатов: ', 130, 60);
 
   // Пишем результат-время
-  ctx.fillStyle = '#000';
+  ctx.fillStyle = textColor;
   for (var i = 0; i < times.length; i++) {
     // Разница между максимальной полоской и текущей
     var differenceBar = Math.round(BAR_HEIGHT - times[i] / getMaxElement(times) * BAR_HEIGHT);
@@ -43,20 +48,21 @@ window.renderStatistics = function (ctx, names, times) {
   }
 
   // Рисуем прямоугольник-полоску
-  for (i = 0; i < times.length; i++) {
-    var rnd = Math.random();
+  for (var j = 0; j < times.length; j++) {
+    // Генерируем случайное число от 0.25 до 1
+    var rnd = getRandom(0.25, 1);
     ctx.fillStyle = 'rgba(0, 0, 255, ' + rnd + ')';
-    if (names[i] === 'Вы') {
+    if (names[j] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
-    differenceBar = Math.round(BAR_HEIGHT - times[i] / getMaxElement(times) * BAR_HEIGHT);
-    ctx.fillRect(150 + i * shift, 100 + differenceBar, BAR_WIDTH, BAR_HEIGHT - differenceBar);
+    differenceBar = Math.round(BAR_HEIGHT - times[j] / getMaxElement(times) * BAR_HEIGHT);
+    ctx.fillRect(150 + j * shift, 100 + differenceBar, BAR_WIDTH, BAR_HEIGHT - differenceBar);
   }
 
   // Пишем имя
-  ctx.fillStyle = '#000';
-  for (i = 0; i < names.length; i++) {
-    ctx.fillText(names[i] + '  ', 150 + i * shift, 270);
+  ctx.fillStyle = textColor;
+  for (var k = 0; k < names.length; k++) {
+    ctx.fillText(names[k] + '  ', 150 + k * shift, 270);
   }
 };
 
