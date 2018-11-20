@@ -35,6 +35,7 @@ window.renderStatistics = function(ctx, names, times) {
   ctx.fillText('Список результатов: ', 130, 60);
 
   // Пишем результат-время
+  ctx.fillStyle = '#000';
   for (var i = 0; i < times.length; i ++) {
     // Разница между максимальной полоской и текущей
     var differenceBar = Math.round(BAR_HEIGHT - times[i] / getMaxElement(times) * BAR_HEIGHT);
@@ -44,7 +45,6 @@ window.renderStatistics = function(ctx, names, times) {
   // Рисуем прямоугольник-полоску
   for (var i = 0; i < times.length; i ++) {
     var rnd = Math.random();
-    console.log(rnd);
     ctx.fillStyle = 'rgba(0, 0, 255, ' + rnd + ')';
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
