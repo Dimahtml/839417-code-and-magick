@@ -49,10 +49,6 @@ window.renderStatistics = function(ctx, names, times) {
 
   // Пишем имя
   for (var i = 0; i < names.length; i ++) {
-    ctx.fillStyle = 'rgba(0, 0, 255, 0.5)';
-    if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    }
     ctx.fillText(names[i] + '  ', 150 + i * shift, 270);
   }
 };
