@@ -11,6 +11,8 @@ var GAP = 50;
 // смещение одной колонки относительно другой
 var shift = BAR_WIDTH + GAP;
 var textColor = '#000';
+var playerBarColor = 'rgba(255, 0, 0, 1)';
+var anotherPlayersBarColor = 'rgba(0, 0, 255, ';
 
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
@@ -39,7 +41,6 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', 130, 40);
   ctx.fillText('Список результатов: ', 130, 60);
   for (var i = 0; i < times.length; i++) {
-
     // Разница между максимальной шкалой и текущей
     var differenceBar = Math.round(BAR_HEIGHT - times[i] / getMaxElement(times) * BAR_HEIGHT);
     // Пишем результат игрока
@@ -47,9 +48,9 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillText(Math.round(times[i]) + '  ', 150 + i * shift, 90 + differenceBar);
     // Генерируем случайное число от 0.25 до 1 для определения интенсивности цвета шкалы
     var rnd = getRandom(0.25, 1);
-    ctx.fillStyle = 'rgba(0, 0, 255, ' + rnd + ')';
+    ctx.fillStyle = anotherPlayersBarColor + rnd + ')';
     if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+      ctx.fillStyle = playerBarColor;
     }
     // Рисуем шкалу и пишем имя
     ctx.fillRect(150 + i * shift, 100 + differenceBar, BAR_WIDTH, BAR_HEIGHT - differenceBar);
