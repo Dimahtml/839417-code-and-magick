@@ -38,31 +38,22 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.font = '16px PT Mono';
   ctx.fillText('Ура вы победили!', 130, 40);
   ctx.fillText('Список результатов: ', 130, 60);
-
-  // Пишем результат-время
-  ctx.fillStyle = textColor;
   for (var i = 0; i < times.length; i++) {
-    // Разница между максимальной полоской и текущей
-    var differenceBar = Math.round(BAR_HEIGHT - times[i] / getMaxElement(times) * BAR_HEIGHT);
-    ctx.fillText(Math.round(times[i]) + '  ', 150 + i * shift, 90 + differenceBar);
-  }
 
-  // Рисуем прямоугольник-полоску
-  for (var j = 0; j < times.length; j++) {
-    // Генерируем случайное число от 0.25 до 1
+    // Разница между максимальной шкалой и текущей
+    var differenceBar = Math.round(BAR_HEIGHT - times[i] / getMaxElement(times) * BAR_HEIGHT);
+    // Пишем результат игрока
+    ctx.fillStyle = textColor;
+    ctx.fillText(Math.round(times[i]) + '  ', 150 + i * shift, 90 + differenceBar);
+    // Генерируем случайное число от 0.25 до 1 для определения интенсивности цвета шкалы
     var rnd = getRandom(0.25, 1);
     ctx.fillStyle = 'rgba(0, 0, 255, ' + rnd + ')';
-    if (names[j] === 'Вы') {
+    if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
-    differenceBar = Math.round(BAR_HEIGHT - times[j] / getMaxElement(times) * BAR_HEIGHT);
-    ctx.fillRect(150 + j * shift, 100 + differenceBar, BAR_WIDTH, BAR_HEIGHT - differenceBar);
-  }
-
-  // Пишем имя
-  ctx.fillStyle = textColor;
-  for (var k = 0; k < names.length; k++) {
-    ctx.fillText(names[k] + '  ', 150 + k * shift, 270);
+    // Рисуем шкалу и пишем имя
+    ctx.fillRect(150 + i * shift, 100 + differenceBar, BAR_WIDTH, BAR_HEIGHT - differenceBar);
+    ctx.fillStyle = textColor;
+    ctx.fillText(names[i] + '  ', 150 + i * shift, 270);
   }
 };
-
