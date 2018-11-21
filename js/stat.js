@@ -48,10 +48,8 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillText(Math.round(times[i]) + '  ', 150 + i * shift, 90 + differenceBar);
     // Генерируем случайное число от 0.25 до 1 для определения интенсивности цвета шкалы
     var rnd = getRandom(0.25, 1);
-    ctx.fillStyle = anotherPlayersBarColor + rnd + ')';
-    if (names[i] === 'Вы') {
-      ctx.fillStyle = playerBarColor;
-    }
+    // Определяем цвет шкалы
+    ctx.fillStyle = names[i] === 'Вы' ? playerBarColor : anotherPlayersBarColor + rnd + ')';
     // Рисуем шкалу и пишем имя
     ctx.fillRect(150 + i * shift, 100 + differenceBar, BAR_WIDTH, BAR_HEIGHT - differenceBar);
     ctx.fillStyle = textColor;
