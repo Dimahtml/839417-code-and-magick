@@ -31,13 +31,21 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template').c
 // заполняем массив данными, описывающими магов
 createWizards(wizards, NAMES, SURNAMES, COAT_COLORS, EYES_COLORS);
 
-for (var j = 0; j < 4; j++) {
+var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
-  wizardElement.querySelector('.setup-similar-label').textContent = wizards[j].name;
-  similarListElement.appendChild(wizardElement);
-  wizardElement.querySelector('.wizard-coat').style.fill = wizards[j].coatColor;
-  wizardElement.querySelector('.wizard-eyes').style.fill = wizards[j].eyesColor;
+
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+
+  return wizardElement;
+};
+
+var fragment = document.createDocumentFragment();
+
+for (var j = 0; j < wizards.length; j++) {
+  fragment.appendChild(renderWizard(wizards[j]));
 }
 
-var visible = document.querySelector('.setup-similar');
-visible.classList.remove('hidden');
+similarListElement.appendChild(fragment);
+visibleDiv.querySelector('.setup-similar').classList.remove('hidden');
