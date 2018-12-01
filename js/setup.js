@@ -7,21 +7,24 @@ var NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Крис�
 var SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
-// в этом массиве будут храниться данные, описывающие магов
-var wizards = [{}, {}, {}, {}];
 
 // Возвращает случайное целое число между min (включительно) и max (не включая max)
-// Использование метода Math.round() даст вам неравномерное распределение!
-function getRandom(min, max) {
+function getRandom (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-var createWizards = function (arrayReturned, arrayFirst, arraySecond, arrayThird, arrayFourth) {
+// функция для генерации данных
+var generateWizards = function (names, surnames, coatColors, eyesColors) {
+  var arrayOfWizards = [];
   for (var i = 0; i < 4; i++) {
-    arrayReturned[i].name = arrayFirst[getRandom(0, 8)] + ' ' + arraySecond[getRandom(0, 8)];
-    arrayReturned[i].coatColor = arrayThird[getRandom(0, 6)];
-    arrayReturned[i].eyesColor = arrayFourth[getRandom(0, 5)];
-  }
+    var wizard = {
+      name: names[getRandom(0, 8)] + ' ' + surnames[getRandom(0, 8)],
+      coatColor: coatColors[getRandom(0, 6)],
+      eyesColor: eyesColors[getRandom(0, 5)]
+    };
+    arrayOfWizards.push(wizard);
+  };
+  return arrayOfWizards;
 };
 
 // Элемент, куда будем вставлять похожих магов
@@ -29,7 +32,7 @@ var similarListElement = document.querySelector('.setup-similar-list');
 // Шаблон, который мы будем копировать
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 // заполняем массив данными, описывающими магов
-createWizards(wizards, NAMES, SURNAMES, COAT_COLORS, EYES_COLORS);
+var wizards = generateWizards (NAMES, SURNAMES, COAT_COLORS, EYES_COLORS);
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
