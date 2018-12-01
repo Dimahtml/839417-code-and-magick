@@ -9,7 +9,7 @@ var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
 // Возвращает случайное целое число между min (включительно) и max (не включая max)
-function getRandom (min, max) {
+function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
@@ -23,7 +23,7 @@ var generateWizards = function (names, surnames, coatColors, eyesColors) {
       eyesColor: eyesColors[getRandom(0, 5)]
     };
     arrayOfWizards.push(wizard);
-  };
+  }
   return arrayOfWizards;
 };
 
@@ -32,7 +32,7 @@ var similarListElement = document.querySelector('.setup-similar-list');
 // Шаблон, который мы будем копировать
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 // заполняем массив данными, описывающими магов
-var wizards = generateWizards (NAMES, SURNAMES, COAT_COLORS, EYES_COLORS);
+var wizards = generateWizards(NAMES, SURNAMES, COAT_COLORS, EYES_COLORS);
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
