@@ -64,17 +64,16 @@ var buttonSetupClose = setup.querySelector('.setup-close');
 // поле ввода имени персонажа
 var userNameInput = document.querySelector('.setup-user-name');
 var isFocused = 0;
-userNameInput.addEventListener('focus', function() {
+userNameInput.addEventListener('focus', function () {
   isFocused = 1;
 });
-userNameInput.addEventListener('blur', function() {
+userNameInput.addEventListener('blur', function () {
   isFocused = 0;
 });
 
 var onPopupEscPress = function (evt) {
-  console.log(isFocused + ' escPress');
   if ((evt.keyCode === ESC_KEYCODE) && (!(isFocused === 1))) {
-    closePopup ();
+    closePopup();
   }
 };
 
@@ -89,22 +88,22 @@ var openPopup = function () {
 };
 
 buttonSetupOpen.addEventListener('click', function () {
-  openPopup ();
+  openPopup();
 });
 
 buttonSetupOpen.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
-    openPopup ();
+    openPopup();
   }
 });
 
 buttonSetupClose.addEventListener('click', function () {
-  closePopup ();
+  closePopup();
 });
 
 buttonSetupClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
-    closePopup ();
+    closePopup();
   }
 });
 
