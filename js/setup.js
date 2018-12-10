@@ -80,6 +80,9 @@ var onPopupEscPress = function (evt) {
 var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
+  // При повторном открытии/закрытии диалога, положение диалога должно сбрасываться на изначальное
+  setupDialogElement.style.left = '';
+  setupDialogElement.style.top = '';
 };
 
 var openPopup = function () {
