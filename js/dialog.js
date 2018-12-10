@@ -1,8 +1,7 @@
-'use strict'
+'use strict';
 
 var setupDialogElement = document.querySelector('.setup');
 var dialogHandler = setupDialogElement.querySelector('.upload');
-var setupClose = document.querySelector('.setup-close');
 
 dialogHandler.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
@@ -40,9 +39,9 @@ dialogHandler.addEventListener('mousedown', function (evt) {
     document.removeEventListener('mouseup', onMouseUp);
 
     if (dragged) {
-      var onClickPreventDefault = function (evt) {
-        evt.preventDefault();
-        dialogHandler.removeEventListener('click', onClickPreventDefault)
+      var onClickPreventDefault = function (evnt) {
+        evnt.preventDefault();
+        dialogHandler.removeEventListener('click', onClickPreventDefault);
       };
       dialogHandler.addEventListener('click', onClickPreventDefault);
     }
@@ -53,8 +52,3 @@ dialogHandler.addEventListener('mousedown', function (evt) {
   document.addEventListener('mouseup', onMouseUp);
 
 });
-
-
-
-
-
